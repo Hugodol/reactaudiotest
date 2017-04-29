@@ -1,7 +1,7 @@
 let constraints = {audio: true};
 let chunks = [];
 
-const getUserMedia = (urlCb, recCb) => {
+const getUserMedia = (urlsCb, recCb) => {
   if (navigator.getUserMedia) {
     console.log('getUserMedia supported');
     navigator.mediaDevices.getUserMedia(constraints)
@@ -10,14 +10,9 @@ const getUserMedia = (urlCb, recCb) => {
       recCb(recorder);
       recorder.onstop = e => {
         let blob = new Blob(chunks, {'type': 'audio/mp3'});
-
-        console.log('blob', blob);
-        var file = new File([blob], 'test.mp3');
-        console.log('file', file);
-
         chunks = [];
-        // let url = window.URL.createObjectURL(blob);
-        urlCb(file);
+        let url = window.URL.createObjectURL(blob);
+        urlsCb(url);
       }
       recorder.ondataavailable = e => chunks.push(e.data);
     })

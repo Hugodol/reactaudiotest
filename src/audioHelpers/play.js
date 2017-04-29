@@ -1,16 +1,14 @@
 import {Howl} from 'howler';
 
-const play = url => {
-  // var file = new File([url], "testfile.mp3");
-  // console.log(file);
-
-  var recording = new Howl({
-    src: [url],
-    format: 'mp3',
-    html5: true
+const play = urls => {
+  urls.forEach(track => {
+    var recording = new Howl({
+      src: [track],
+      format: 'mp3',
+      html5: true
+    });
+    recording.play();
   });
-  console.log(recording);
-  recording.play();
 }
 
 export default play;

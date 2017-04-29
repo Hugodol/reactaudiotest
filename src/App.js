@@ -11,7 +11,8 @@ class App extends Component {
     super();
     this.state = {
       recorder: null,
-      url: null
+      urls: [],
+      newUrl: 0
     }
   }
 
@@ -26,8 +27,9 @@ class App extends Component {
     this.setState({recorder: recorder});
   }
 
-  setUrl(url) {
-    this.setState({url: url});
+  setUrl(urls) {
+    this.state.urls.push(urls);
+    this.setState({newUrl: this.state.newUrl++});
   }
 
   render() {
@@ -38,14 +40,17 @@ class App extends Component {
           <h2>Cloud Mix Audio Tests</h2>
         </div>
         <button onClick={() => {
-          record(this.state.recorder);
+          record(this.state.recorder, this.state.urls);
         }}>Rec</button>
         <button onClick={() => {
           stop(this.state.recorder);
         }}>Stop</button>
         <button onClick={() => {
-          play(this.state.url);
+          play(this.state.urls);
         }}>Play</button>
+        {this.state.urls.map((url, i) => {
+          return <div key={i}>{url}</div>
+        })}
       </div>
     );
   }
