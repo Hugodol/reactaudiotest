@@ -11,13 +11,14 @@ const play = (urls, offset) => {
     var recording2 = new Howl({
       src: [urls[1]],
       format: 'mp3',
-      html5: true
+      html5: true,
+      sprite: {
+        begin: [offset, 30000]
+      }
     });
 
-    setTimeout(() => {
-      recording.play();
-    }, offset);
-    recording2.play();
+    recording.play();
+    recording2.play('begin');
   // });
 }
 
