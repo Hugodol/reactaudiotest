@@ -12,7 +12,8 @@ class App extends Component {
     this.state = {
       recorder: null,
       urls: [],
-      newUrl: 0
+      newUrl: 0,
+      offset: 0
     }
   }
 
@@ -32,6 +33,10 @@ class App extends Component {
     this.setState({newUrl: this.state.newUrl++});
   }
 
+  setOffset(offset) {
+    this.setState({offset: offset});
+  }
+
   render() {
     return (
       <div className="App">
@@ -46,8 +51,12 @@ class App extends Component {
           stop(this.state.recorder);
         }}>Stop</button>
         <button onClick={() => {
-          play(this.state.urls);
+          play(this.state.urls, this.state.offset);
         }}>Play</button>
+        <input onChange={e => {
+          this.setOffset(e.target.value);
+          console.log('current offset is', e.target.value);
+        }}></input>
         {this.state.urls.map((url, i) => {
           return <div key={i}>{url}</div>
         })}

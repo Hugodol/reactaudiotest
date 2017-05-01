@@ -1,6 +1,6 @@
 import {Howl} from 'howler';
 
-const play = urls => {
+const play = (urls, offset) => {
   // urls.forEach(track => {
     var recording = new Howl({
       src: [urls[0]],
@@ -16,7 +16,7 @@ const play = urls => {
 
     setTimeout(() => {
       recording.play();
-    }, 450);
+    }, offset);
     recording2.play();
   // });
 }
