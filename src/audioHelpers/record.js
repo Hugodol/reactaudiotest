@@ -1,10 +1,10 @@
-import play from './play.js';
+import playback from './playback.js';
 
 const record = (recorder, urls) => {
   let media = recorder;
   media.start();
   if (urls.length > 0) {
-    play(urls, 0);
+    playback(urls);
   }
   console.log(media.state);
   console.log('recording started');

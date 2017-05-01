@@ -12,7 +12,7 @@ const getUserMedia = (urlsCb, recCb) => {
         let blob = new Blob(chunks, {'type': 'audio/mp3'});
         chunks = [];
         let url = window.URL.createObjectURL(blob);
-        urlsCb(url);
+        urlsCb({url: url, offset: 0});
       }
       recorder.ondataavailable = e => chunks.push(e.data);
     })
