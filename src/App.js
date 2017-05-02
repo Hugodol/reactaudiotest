@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AudioVisual from './AudioVisual.js';
 import logo from './images/logo.svg';
 import './styles/App.css';
 import getUserMedia from './audioHelpers/getUserMedia.js';
@@ -6,13 +7,14 @@ import record from './audioHelpers/record.js';
 import stop from './audioHelpers/stop.js';
 import play from './audioHelpers/play.js';
 
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
       recorder: null,
       urls: [],
-      newUrl: 0,
+      change: false,
       offset: 0
     }
   }
@@ -30,11 +32,16 @@ class App extends Component {
 
   setUrl(urls) {
     this.state.urls.push(urls);
-    this.setState({newUrl: this.state.newUrl++});
+    this.setState({change: !this.state.change});
   }
 
   setOffset(offset) {
     this.setState({offset: offset});
+  }
+
+  setTrackOffset(i, offset) {
+    this.state.urls[i].offset = offset;
+    this.setState({change: !this.state.change});
   }
 
   render() {
@@ -51,14 +58,14 @@ class App extends Component {
           stop(this.state.recorder);
         }}>Stop</button>
         <button onClick={() => {
-          play(this.state.urls, this.state.offset);
+          play(this.state.urls, this.state.offset, this.setTrackOffset.bind(this));
         }}>Play</button>
         <input onChange={e => {
           this.setOffset(e.target.value);
           console.log('current offset is', e.target.value);
         }}></input>
         {this.state.urls.map((url, i) => {
-          return <div key={i}>{url}</div>
+          return <AudioVisual key={i} url={url.url} />
         })}
       </div>
     );
