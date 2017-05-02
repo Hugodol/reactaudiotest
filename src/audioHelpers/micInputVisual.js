@@ -1,5 +1,5 @@
 import WaveSurfer from 'wavesurfer';
-import Microphone from '../../node_modules/wavesurfer/dist/plugin/wavesurfer.microphone.min.js';
+import '../../node_modules/wavesurfer/dist/plugin/wavesurfer.microphone.min.js';
 
 
 const micInputVisual = () => {
