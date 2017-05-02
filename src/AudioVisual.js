@@ -1,10 +1,8 @@
 import React from 'react';
+import './styles/AudioVisual.css';
 import waveform from './audioHelpers/analyser.js';
 
 class AudioVisual extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     waveform(this.props.url);
@@ -13,7 +11,7 @@ class AudioVisual extends React.Component {
   render() {
     return (
       <div>
-        <div id='waveform'></div>
+        <div className='waveform'></div>
       </div>
     );
   }

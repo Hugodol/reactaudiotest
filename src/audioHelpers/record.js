@@ -1,10 +1,13 @@
 import playback from './playback.js';
 
-const record = (recorder, urls) => {
-  // if (urls.length > 0) {
-  //   urls.pop();
-  // }
+const record = (recorder, urls, isRec, firstRec, firstCb) => {
+  if (!firstRec) {
+    firstCb();
+  } else {
+    urls.pop();
+  }
   recorder.start();
+  isRec();
   if (urls.length > 0) {
     playback(urls);
   }
